@@ -1,22 +1,31 @@
+// processing video library
 import processing.video.*;
-import java.util.Random;
-
-int videoScale = 2;
-int cols, rows;
-
+// capture video
 Capture video;
+
+//variables for Perlin array 
+//taken from CART 253 taught by Jason Lewis
+int maxPerlin = 50;
+int perlinCount = 0;
+int perlinIndex = 0;
+boolean arrayFull = false;
+
+//instantiating new Perlin object
+Perlin circle = new Perlin();
+
+//Creating an array of Perlin objects
+Perlin[] perlinArray = new Perlin[maxPerlin];
 
 void setup() 
 {
   size(640, 480);
-  cols = width / videoScale;
-  rows = height / videoScale;
   background(0);
+  // new video object
   video = new Capture(this, 640, 480);
   video.start();
-
 }
 
+// capture video
 void captureEvent(Capture video) 
 {
    video.read();
@@ -24,32 +33,123 @@ void captureEvent(Capture video)
 
 void draw()
 {
+
+// load pixels from the video object
+  loadPixels();
   video.loadPixels();
- //video.read();
  
-  for (int i = 0; i < cols; i++) 
+
+// run through every pixel on screen on the x axis
+  for (int i = 0; i < video.width; i++) 
   {
-    for(int j = 0; j < rows; j++)
+// run through every pixel on screen on the y axis
+    for(int j = 0; j < video.height; j++)
     {
-      int x = i*videoScale;
-      int y = j*videoScale;
+// magic line of code that allows the program to understand a pixels location
+      int loc = (video.width - i - 1) + j * video.width;
+
+// creating variable to store the rgb values from each pixel
+      float r;
+      float g;
+      float b;
       
-      //int loc = (video.width - i - 1) + (j * video.width);
-      //print(loc);
-      color c = video.pixels[i + j * video.width];
-      //float sz = (brightness(5)/255) * videoScale;
+// store the red, green, blue value for the current pixel
+      r = red(video.pixels[loc]);
+      g = green(video.pixels[loc]);
+      b = blue (video.pixels[loc]);
+
+      video.pixels [i] = loc;
+// ensure the r, g, b values remain between 0 - 255
+      r = constrain(r, 0, 255);
+      g = constrain(g, 0, 255);
+      b = constrain(b, 0, 255);
       
-      //rectMode(CENTER);
-      fill(c);
-      stroke(0);
-      //rect(x + videoScale/2, y + videoScale/2, sz, sz);
-     rect(x,y,videoScale, videoScale);
       
+// combine the color values for each pixel and set that pixel to the proper color
+      color c = color(r, g, b);
+      pixels[loc] = c;
      }
    }
-    
-    //image(video, 0, 0);
-    
-    
+   
+// update the pixels
+     updatePixels();
+
+//taken from CART 253 taught by Jason Lewis 
+//display perlin object
+     if (!arrayFull)
+     {
+        perlinIndex = perlinCount;
+      } 
+  for (int i=0; i<perlinIndex; i++) {
+    perlinArray[i].display();
   }
+}
+
+//if mouse pressed, run the add perlin function, adding a perlin from the array
+void mousePressed() {
+  addPerlin();
+}  
   
+//taken from CART 253 taught by Jason Lewis 
+//if the array isn't full make another perlin object, if it is full restart the array
+void addPerlin() 
+{
+  if (perlinCount < perlinArray.length) {
+    perlinArray[perlinCount] = new Perlin();
+    perlinCount++;
+  } else {  
+    arrayFull = true;
+    perlinCount = 0;
+  }
+}  
+  
+//perlin class  
+class Perlin
+{
+//declaring our variables for the perlin object  
+  float mX = mouseX;
+  float mY = mouseY;
+  float size = 30;
+  
+//declaring variables for the noise value 
+  float tX = random(0,1);
+  float tY = random(0,1);
+  
+//declaring variable for montecarlo method
+      float colorValue = randomGaussian() * 15;
+      float stanD = 90;   
+      float mean = 40;
+  
+  Perlin()
+  {
+    
+  }  
+  
+  void display()
+  {
+  
+//multiply and add those numbers to get our distribution
+      colorValue = colorValue * stanD + mean;    
+
+// setting our x and y values to noise value between 0 and 1.    
+      float x = noise(tX);
+      float y = noise(tY);
+      
+// incrementing tX and tY location by 0.01 and 0.02      
+      tX = tX + 0.01;
+      tY = tY + 0.02;
+
+// variable for limit that circle location can exceed mouse position            
+      float range = 200;
+      
+// take x, y value, tell it it's between 0-1, then scale it to my range.
+      x = map(x, 0, 1, mouseX - range, mouseX + range);
+      y = map(y, 0, 1, mouseY - range, mouseY + range);
+    
+      noStroke();
+      fill(colorValue, 150, 200, 150);
+      ellipse(x, y, size, size);
+  }
+ 
+} 
+
