@@ -1,0 +1,498 @@
+// variables for spawn times
+int time = 0;
+float timeDifference = random(10000, 20000);
+
+// variables for bump array size
+int bumpCount = 4;
+
+// creating rolly var
+Rolly roll;
+
+// creating ArrayList's (They're awesome)
+ArrayList<Food> foodArrayList = new ArrayList<Food>();
+ArrayList<SuperFood> superFoodArrayList = new ArrayList<SuperFood>();
+ArrayList<Obstacle> obstacleArrayList = new ArrayList<Obstacle>();
+ArrayList<Bumper> bumpArrayList = new ArrayList<Bumper>();
+
+void setup()
+{
+  size(600, 400);
+
+  //make an array list of 5 Foods 
+  for (int i = 0; i < 5; i++) 
+  {
+    //add a new Food
+    foodArrayList.add(new Food());
+  }
+  //make an array list of 3 SuperFoods
+  for (int i = 0; i < 3; i++) 
+  {
+    //add a new superFood
+    superFoodArrayList.add(new SuperFood());
+  }
+  //make an array list of 4 Obstacles
+  for (int i = 0; i < 4; i++) 
+  {
+    //add a new Obstacle
+    obstacleArrayList.add(new Obstacle());
+  }
+  //make an array list of Bumpers to the size of bumpCount
+  for (int i = 0; i < bumpCount; i++)
+  {
+    //add a new Bumper
+    bumpArrayList.add(new Bumper(random (3, 20), random(height), random(width), random(1, 3)));
+  }
+  // instantiate new rolly
+  roll = new Rolly(300, 200, 30);
+}
+
+void draw()
+{
+
+  background(255);
+  // if milliseconds are over 3000, add a new food and time is now equal to current millisecond 
+  if (millis() > time + timeDifference)
+  {
+
+    // Limit the possible amount of spawns to 5
+    if (superFoodArrayList.size() < 5)
+    {
+      // create a new SuperFood
+      superFoodArrayList.add(new SuperFood());
+    }
+
+    // Limit the amount of possible spawns to 7
+    if (foodArrayList.size() < 7)
+    {
+      // create new Food
+      foodArrayList.add(new Food());
+    }
+
+    // make the time value equal to the current millis so that the counter doesn't stop after the first cycle
+    time = millis();
+  }
+
+  // if the array list size is less than 4 create a new Obstacle
+  if (obstacleArrayList.size() < 4)
+  {
+    obstacleArrayList.add(new Obstacle());
+  }
+  // for each item of type food in foodArray, call collide()
+  for (int i = 0; i < foodArrayList.size(); i++)
+  { 
+    //run through obj in food array list, call collide method for each 
+    foodArrayList.get(i).collide();
+  }
+  // for each item of type food in superfoodArray, call collide()
+  for (int i = 0; i < superFoodArrayList.size(); i++)
+  { 
+    //run through obj in superFood array list, call collide method for each 
+    superFoodArrayList.get(i).collide();
+  }
+  // for each item of type food in objectArray, call collide()
+  for (int i = 0; i < obstacleArrayList.size(); i++)
+  { 
+    //run through obj in object array list, call collide method for each 
+    obstacleArrayList.get(i).collide();
+  }
+
+  // Display our objects
+  for (Obstacle ob : obstacleArrayList)
+  {
+    ob.display();
+  }
+
+  for (Food f : foodArrayList)
+  {
+    f.display();
+  }
+
+  for (SuperFood sf : superFoodArrayList)
+  {
+    sf.display();
+    // call the grow function
+    sf.grow();
+  }
+
+  // display and move Bumper objects
+  for (Bumper bump : bumpArrayList)
+  {
+    // for each instance of a Bumper object call the attract method in Rolly 
+    roll.applyBumperAttract(bump);
+    // if the Bumpers have passed the sketch width, replace them before 0 on the x axis, give them a random y, mass and speed value
+    if (bump.position.x > width)
+    {
+      bump.position.x = random(-10, -5);
+      bump.position.y = random(height);
+      bump.mass = random(3, 20);
+      bump.bumpSpeed = random(1, 3);
+    }
+
+    bump.display();
+    bump.move();
+  }
+
+  // for each item of type Bumper in bumpArray, call push()
+  for (int i = 0; i < bumpArrayList.size(); i++)
+  {
+    bumpArrayList.get(i).push();
+  }
+  
+  roll.display();
+  roll.makeForceRelativeToSize();
+  roll.update();
+}
+
+// if keyPressed call applyForceFromInput method in roll object
+void keyPressed()
+{ 
+  roll.applyForceFromInput();
+}
+
+// if keyReleased call checkKeyRelease method in roll object
+void keyReleased()
+{
+  roll.checkKeyRelease();
+}
+
+class Bumper {
+
+  // create variables for Bumper class
+  float size = random(50, 100); 
+  float mass;
+  float G; 
+  float colDistance = 0;
+  float bumpSpeed;
+  boolean canAttract;
+  //create a PVector for the Bumpers position and assign it the value of x and y in the constructor
+  PVector position;
+
+  Bumper(float m, float x, float y, float s)
+  {
+    mass = m;
+    position = new PVector(x, y);
+    G = 1;
+    this.bumpSpeed = s;
+  }
+
+  // function for attracting the Rolly object 
+  // taken from CART 353 exerc_2_8 with Rilla Khaled
+  PVector attract(Rolly roll) {
+
+    // create a condition so that if the collision distance between Rolly and Bumper instance is more than 100
+    // we can go ahead and apply the attraction force on Rolly
+    if (canAttract)
+    {
+      PVector force = PVector.sub(position, roll.position);   // calculate direction of force considering the Bumper position and the Rolly position
+      float d = force.mag();                              // get the magnitude (distance between objects) of the force vector 
+      d = constrain(d, 1, 40);                        // constrain forces magnitude to a value between 1 and 40
+      force.normalize();                                  // normalize the force vector (make it's magnitude 1)
+      float strength = (G * mass * roll.size) / (d * d);      // calculate gravitional force magnitudem NOTE: this equation remains confusing to me. I now understand that the force is relative to the objects mass, direction and gravity
+      force.mult(strength);                                  // add the attraction stregth equation to the force vector
+      return force;                                          // return the value of force to vector f in the applyBumperAttract method when attract() is called
+    }
+
+    return new PVector(0, 0);                                // return a value of 0 because vector f expects one
+  }
+  // display the ellipse 
+  void display()
+  {
+    fill(0);
+    ellipse(position.x, position.y, mass, mass);
+  }
+
+  // increase ellipses x position by bumpSpeed
+  void move()
+  {
+    position.x += bumpSpeed;
+  }
+
+  // method for pushing the rolly away once it collides with the Bumpers
+  void push()
+  {  
+    //measure the distance of Roll obj's x, y position, to the disance of each Bumper obj's x, y position
+    float distance = dist(roll.position.x, roll.position.y, position.x, position.y);
+
+    //if the distance considering the Roll and Bumper objects radius is less than or equal to the collision distances value (0)
+    if (distance - abs(roll.size / 2 + mass / 2) < colDistance)
+    {      
+      canAttract = false;                                                     // then cancel the attract method
+      roll.maxSpeed = 50;                                                     // max the max speed 50
+      PVector swoosh = PVector.sub(roll.position, position);                  // get a direction for swoosh  based on Rolly and Bumper position
+      swoosh.normalize();                                                     // make the magnitude of swoosh equal to 1
+      swoosh.mult(25);                                                        // multiply swoosh by 25
+      roll.velocity.add(swoosh);                                              // add swoosh to roll's velocity   
+    } else if (distance - abs(roll.size / 2 + mass / 2) > colDistance + 100)  // if the collision distance between Rolly and Bumper is more than 100, 
+    {
+      canAttract = true;                                                      // Bumpers can attract the Rolly
+      roll.maxSpeed = 3;                                                      // the maximum velocity for Rolly is back to 3 (it's original value)
+    }
+  }
+}
+
+class Food
+{
+  // food variables
+  float size = 10;
+  float x = random(600);
+  float y;
+  float colDistance = 0;
+  boolean counter;
+
+  Food()
+  {
+  }
+
+  void display()
+  {
+    // used to anchor food to bottom of screen 
+    y = height / 2 - size/2;
+
+    noStroke();
+    fill(0);
+    ellipse(x, y, size, size);
+    fill(255);
+    ellipse(x, y, size / 1.5, size / 1.5);
+  }
+
+  // method for removing Food if it's collided with by Rolly
+  void collide()
+  {  
+    //measure the distance of roll objects x, y position, to the disance of each food objects x, y position
+    float distance = dist(roll.position.x, roll.position.y, x, y);
+    
+    //if the distance considering the roll and food objects radius is less than or equal to the collision distances value
+    if (distance - abs(roll.size / 2 + size / 2) <= colDistance)
+    {      
+      //then remove the food object from the list array 
+      foodArrayList.remove(this);
+  
+    }
+  }
+}
+
+class Obstacle
+{
+  // Obstacle variables
+  float obstacleHeight = random(- 350, - 10);
+  float obstacleWidth = 10;
+  float x = random(600);
+  float y = height;
+  float colDistance = 0;
+  float G;
+
+  PVector obsPosition;
+
+  Obstacle()
+  {
+    this.obsPosition = new PVector(x, y);
+  }
+
+  // draw the obstacle
+  void display()
+  {
+    stroke(0);
+    fill(255);
+    rect(obsPosition.x, obsPosition.y, obstacleWidth, obstacleHeight);
+    fill(255);
+  }
+  
+ // method for repositioning Obstacle if it's collided with by Rolly and increasing the Rolly size
+  void collide()
+  {  
+
+    boolean obsLeft = (roll.position.x + roll.size /2 > obsPosition.x);
+    boolean obsRight = (roll.position.x - roll.size /2 < obsPosition.x + obstacleWidth);
+    boolean obsTop = (roll.position.y + roll.size /2 > obsPosition.y + obstacleHeight);
+    boolean obsBottom = (roll.position.y - roll.size /2 < obsPosition.y);
+
+    if (obsLeft && obsRight && obsTop && obsBottom)
+    { 
+      if (roll.size < 100)
+      {
+        roll.size += 5;
+        obstacleArrayList.remove(this);
+      }
+    }
+  }
+}
+
+class Rolly 
+{
+  // Rolly variables
+  PVector position;
+  PVector velocity;
+  PVector gravity;
+  PVector jumpForce;
+  PVector acceleration;
+
+  float size;
+  float maxSpeed = 5;
+  float rollySpeed = 0.5;
+
+  boolean moveLeft;
+  boolean moveRight;
+  boolean moveUp;
+  boolean moveDown;
+  boolean jump;
+
+  // Rolly constructor
+  Rolly(float x, float y, float size)
+  {
+    this.size = size;
+    this.velocity = new PVector(0, 0);
+    this.position = new PVector(x, y);
+    this.gravity = new PVector(0, .5);
+    this.jumpForce = new PVector(0, -30);
+    this.acceleration = new PVector(0, 0);
+  }
+
+  // draw the Rolly and call the move method
+  void display()
+  {
+    noStroke();
+    fill(255, 127, 80, 160);
+    ellipse(position.x, position.y, size, size);
+    move();
+  }
+  // if a certain key is pressed, the condition for the if statements are true and add a direction to Rollys acceleration
+  void move()
+  {
+    if (moveUp)
+    {
+      PVector up = new PVector(0, -rollySpeed);
+      acceleration.add(up);
+    } 
+    if (moveDown) 
+    {
+      PVector down = new PVector(0, rollySpeed);
+      acceleration.add(down);
+    } 
+    if (moveRight) 
+    {
+      PVector right = new PVector(rollySpeed, 0);
+      acceleration.add(right);
+    } 
+    if (moveLeft) 
+    {
+      PVector left = new PVector(-rollySpeed, 0);
+      acceleration.add(left);
+    }
+    // if enter is pressed, add jumpForce to the position and set jump to false
+    if (jump)
+    {
+      position.add(jumpForce);
+      jump = false;
+    }
+
+    // ensure that if we aren't pressing any key, our Rolly's object has a velocity of 0
+    if (!moveRight && !moveLeft && !moveUp && !moveDown)
+    {
+      velocity.mult(0);
+    }
+  }
+
+  // method to make the size of the Rolly relative to acceleration 
+  void makeForceRelativeToSize()
+  {
+    PVector force = new PVector(0, 0);
+    PVector f = PVector.div(force, size);
+    acceleration.add(f);
+  }
+
+  // update the Rolly's position
+  void update()
+  {
+    // if acceleration isn't 0 add acceleration to velocity
+    if (acceleration.mag() > 0)
+    {
+      velocity.add(acceleration);
+    }
+    // limit the current velocity is greater than the set maxSpeed, make the velocity 1 and increase it by maxSpeed
+    // so the velocity doesn't accumulate forever
+    if (velocity.mag() > maxSpeed)
+    {
+      velocity.normalize();
+      velocity.mult(maxSpeed);
+    }
+    // really ugly condition ensuring Rolly doesn't leave the sketch considering velocity
+    if ((position.x + velocity.x) - size/2 > 0 && (position.x + velocity.x) + size/2 < width && (position.y + velocity.y)  + size/2 < height && (position.y + velocity.y) - size/2 > 0)
+    {
+      position.add(velocity);
+    }
+
+    acceleration.mult(0);
+  }
+
+  // if keyPressed booleans necessary for applying direction are true
+  void applyForceFromInput()
+  {
+
+    if (keyCode == UP)
+    {
+      moveUp = true;
+    }
+
+    if (keyCode == DOWN) 
+    {
+      moveDown = true;
+    }
+
+    if (keyCode == RIGHT) 
+    {
+      moveRight = true;
+    }
+
+    if (keyCode == LEFT) 
+    {
+      moveLeft = true;
+    }
+
+    if (keyCode == ENTER)
+    {
+      jump = true;
+    }
+  }
+  // if keyReleased booleans necessary for applying direction are false
+  void checkKeyRelease()
+  {
+    if (key == CODED) {
+
+      if (keyCode == UP)
+      {
+        moveUp = false;
+      }
+
+      if (keyCode == DOWN) 
+      {
+        moveDown = false;
+      }
+
+      if (keyCode == RIGHT) 
+      {
+        moveRight = false;
+      }
+
+      if (keyCode == LEFT) 
+      {
+        moveLeft = false;
+      }
+    }
+  }
+
+  // method for applying Bumper objects attract method
+  void applyBumperAttract(Bumper bump)
+  {
+    // variable containing the value returned from Bumper attract method
+    PVector f = bump.attract(this);
+    // if f's magnitude is greater than max velocity divided by a lot
+    if (f.mag() > maxSpeed/27); 
+    {
+      f.normalize();           // set f's magnitude to 1
+      f.mult(maxSpeed/27);     // then cap f at a fraction of the maxSpeed
+    }
+    acceleration.add(f);       // add this force to acceleration
+  }
+}
+
+
