@@ -24,15 +24,15 @@ void setup()
   // Read content of timelog file and create a string array of it's individual lines
   String[] timeLogData = loadStrings("timelog");
   // Array to test for "//" string
-  String[] regexComparison;
+  String[] checkIfMatched;
   
   // Run through each line element of the timeLogData array
   // Check for "//", if the string data found is the same, skip this string and continue to the next
   // If the data isn't matched, split the string at each comma and add that to the tableOfContents array
   for (String line : timeLogData)
   {
-    regexComparison = match(line, "//");
-    if (regexComparison != null)
+    checkIfMatched = match(line, "//");
+    if (checkIfMatched!= null)
     {
       continue;
     }
