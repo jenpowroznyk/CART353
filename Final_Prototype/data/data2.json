@@ -1,69 +1,1212 @@
  [
-    {
-      "mood": "positive",
-      "dailyTaskList": [
-        {
-          "task": "eat",
-          "value": 0
-        },
-        {
-          "task": "dork",
-          "value": 0
-        },
-        {
-          "task": "swim",
-          "value": 0
-        },
-        {
-          "task": "bike",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "mood": "negative",
-      "dailyTaskList": [
-        {
-          "task": "swim",
-          "value": 0
-        },
-        {
-          "task": "dork",
-          "value": 0
-        },
-        {
-          "task": "sleep",
-          "value": 0
-        },
-        {
-          "task": "dance",
-          "value": 0
-        }
-      ]
-    },
-    {
-      "mood": "negative",
-      "dailyTaskList": [
-        {
-          "task": "eat",
-          "value": 0
-        },
-        {
-          "task": "double",
-          "value": 0
-        },
-        {
-          "task": "log",
-          "value": 0
-        },
-        {
-          "task": "swatching",
-          "value": 0
-        },
- 	{
-          "task": "LegDancing",
-          "value": 0
-        }
-      ]
-    }
-  ]
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Run",
+        "value": 1.379931926727295
+      },
+      {
+        "task": "Partying",
+        "value": 0.49573779106140137
+      },
+      {
+        "task": "Programmed",
+        "value": 4.201449394226074
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Watched hockey",
+        "value": 0.19767522811889648
+      },
+      {
+        "task": "Sleeping",
+        "value": 0.03461331129074097
+      },
+      {
+        "task": "Sleeping",
+        "value": 0.3767988085746765
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Cooked",
+        "value": 2.6764485836029053
+      },
+      {
+        "task": "Worked",
+        "value": 2.58730411529541
+      },
+      {
+        "task": "Watched hockey",
+        "value": 4.538209915161133
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Played chess",
+        "value": 0.8790645003318787
+      },
+      {
+        "task": "Cooked",
+        "value": 4.843475341796875
+      },
+      {
+        "task": "Cooked",
+        "value": 4.2998576164245605
+      },
+      {
+        "task": "Transit",
+        "value": 0.9090772271156311
+      },
+      {
+        "task": "Went out with friends",
+        "value": 0.4290097951889038
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Homework",
+        "value": 3.4620931148529053
+      },
+      {
+        "task": "Dance",
+        "value": 0.8102035522460938
+      },
+      {
+        "task": "Watched hockey",
+        "value": 1.812772512435913
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Homework",
+        "value": 2.387712240219116
+      },
+      {
+        "task": "Surfed the web",
+        "value": 1.397216558456421
+      },
+      {
+        "task": "Studying",
+        "value": 0.3878742456436157
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Watched TV",
+        "value": 0.13665854930877686
+      },
+      {
+        "task": "Homework",
+        "value": 0.6638643145561218
+      },
+      {
+        "task": "Tutoring",
+        "value": 3.522592782974243
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Gym",
+        "value": 0.7523119449615479
+      },
+      {
+        "task": "Cleaned",
+        "value": 3.9336180686950684
+      },
+      {
+        "task": "Played catan",
+        "value": 3.165471315383911
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Cleaned",
+        "value": 4.757959842681885
+      },
+      {
+        "task": "Run",
+        "value": 1.1569807529449463
+      },
+      {
+        "task": "Gym",
+        "value": 3.6293110847473145
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Cooked",
+        "value": 1.3679414987564087
+      },
+      {
+        "task": "Gym",
+        "value": 0.1082766056060791
+      },
+      {
+        "task": "Played Video games",
+        "value": 3.8614020347595215
+      },
+      {
+        "task": "Worked",
+        "value": 2.218122720718384
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Dance",
+        "value": 0.6478971242904663
+      },
+      {
+        "task": "Played catan",
+        "value": 3.8341333866119385
+      },
+      {
+        "task": "Watched TV",
+        "value": 4.881758213043213
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Played Guitar",
+        "value": 3.767439842224121
+      },
+      {
+        "task": "Cleaned",
+        "value": 4.9811553955078125
+      },
+      {
+        "task": "Played Guitar",
+        "value": 1.6206008195877075
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Played chess",
+        "value": 2.9616281986236572
+      },
+      {
+        "task": "Partying",
+        "value": 2.879866600036621
+      },
+      {
+        "task": "Pottery Class",
+        "value": 1.8713152408599854
+      },
+      {
+        "task": "Reading",
+        "value": 0.7651582360267639
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Cleaned",
+        "value": 2.446727991104126
+      },
+      {
+        "task": "Cleaned",
+        "value": 1.6483306884765625
+      },
+      {
+        "task": "Dance",
+        "value": 0.8542492985725403
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Worked",
+        "value": 3.984715700149536
+      },
+      {
+        "task": "Worked",
+        "value": 3.6366395950317383
+      },
+      {
+        "task": "Programmed",
+        "value": 2.7981722354888916
+      },
+      {
+        "task": "Surfed the web",
+        "value": 1.4324688911437988
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Cuddled my dog",
+        "value": 1.519423484802246
+      },
+      {
+        "task": "Tutoring",
+        "value": 4.893356800079346
+      },
+      {
+        "task": "Went for a walk",
+        "value": 0.32087087631225586
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Transit",
+        "value": 3.7325072288513184
+      },
+      {
+        "task": "Dance",
+        "value": 0.1761344075202942
+      },
+      {
+        "task": "Run",
+        "value": 0.3228414058685303
+      },
+      {
+        "task": "Sleeping",
+        "value": 4.463905334472656
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Cooked",
+        "value": 1.3377103805541992
+      },
+      {
+        "task": "Cleaned",
+        "value": 2.301506519317627
+      },
+      {
+        "task": "Dance",
+        "value": 4.476771831512451
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Partying",
+        "value": 0.9864392876625061
+      },
+      {
+        "task": "Cleaned",
+        "value": 2.5970065593719482
+      },
+      {
+        "task": "Programmed",
+        "value": 0.5999556183815002
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Run",
+        "value": 3.8055553436279297
+      },
+      {
+        "task": "Studying",
+        "value": 3.3732991218566895
+      },
+      {
+        "task": "Cleaned",
+        "value": 2.081094980239868
+      },
+      {
+        "task": "Programmed",
+        "value": 4.4932732582092285
+      },
+      {
+        "task": "Played Guitar",
+        "value": 3.775651693344116
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Pottery Class",
+        "value": 1.1503612995147705
+      },
+      {
+        "task": "Played Guitar",
+        "value": 3.7504563331604004
+      },
+      {
+        "task": "Reading",
+        "value": 4.206940174102783
+      },
+      {
+        "task": "Played chess",
+        "value": 0.39822518825531006
+      },
+      {
+        "task": "Reading",
+        "value": 3.2392311096191406
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Played catan",
+        "value": 4.2443718910217285
+      },
+      {
+        "task": "Pottery Class",
+        "value": 2.6509034633636475
+      },
+      {
+        "task": "Cooked",
+        "value": 0.5309545993804932
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Cooked",
+        "value": 2.027149200439453
+      },
+      {
+        "task": "Talked on the phone",
+        "value": 0.572875440120697
+      },
+      {
+        "task": "Gym",
+        "value": 0.7332086563110352
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Surfed the web",
+        "value": 2.159615993499756
+      },
+      {
+        "task": "Talked on the phone",
+        "value": 4.633500576019287
+      },
+      {
+        "task": "Talked on the phone",
+        "value": 4.874459266662598
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Programmed",
+        "value": 2.153407096862793
+      },
+      {
+        "task": "Watched TV",
+        "value": 4.127627372741699
+      },
+      {
+        "task": "Listened to music",
+        "value": 4.752668857574463
+      },
+      {
+        "task": "Went for a walk",
+        "value": 0.3204232454299927
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Transit",
+        "value": 3.222135543823242
+      },
+      {
+        "task": "Sleeping",
+        "value": 1.897820234298706
+      },
+      {
+        "task": "Played Video games",
+        "value": 1.61651611328125
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Programmed",
+        "value": 4.810240745544434
+      },
+      {
+        "task": "Gym",
+        "value": 3.7988698482513428
+      },
+      {
+        "task": "Partying",
+        "value": 3.6567399501800537
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Played chess",
+        "value": 1.1433205604553223
+      },
+      {
+        "task": "Cleaned",
+        "value": 4.774937629699707
+      },
+      {
+        "task": "Cleaned",
+        "value": 4.989709377288818
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Watched TV",
+        "value": 4.709233283996582
+      },
+      {
+        "task": "Homework",
+        "value": 0.29559195041656494
+      },
+      {
+        "task": "Studying",
+        "value": 2.6189396381378174
+      },
+      {
+        "task": "Tutoring",
+        "value": 3.770317792892456
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Pottery Class",
+        "value": 1.7974728345870972
+      },
+      {
+        "task": "Listened to music",
+        "value": 2.7138724327087402
+      },
+      {
+        "task": "Reading",
+        "value": 4.183321952819824
+      },
+      {
+        "task": "Played Guitar",
+        "value": 4.060544490814209
+      },
+      {
+        "task": "Programmed",
+        "value": 1.0381033420562744
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Programmed",
+        "value": 0.5723834037780762
+      },
+      {
+        "task": "Worked",
+        "value": 0.1707121729850769
+      },
+      {
+        "task": "Surfed the web",
+        "value": 2.381716012954712
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Talked on the phone",
+        "value": 2.3393917083740234
+      },
+      {
+        "task": "Studying",
+        "value": 0.9754014015197754
+      },
+      {
+        "task": "Played Video games",
+        "value": 2.434183120727539
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Played Guitar",
+        "value": 4.042275428771973
+      },
+      {
+        "task": "Run",
+        "value": 0.22688806056976318
+      },
+      {
+        "task": "Programmed",
+        "value": 1.4834215641021729
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Listened to music",
+        "value": 4.224995136260986
+      },
+      {
+        "task": "Cuddled my dog",
+        "value": 3.0228796005249023
+      },
+      {
+        "task": "Talked on the phone",
+        "value": 0.5707117915153503
+      },
+      {
+        "task": "Watched hockey",
+        "value": 3.4294347763061523
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Played catan",
+        "value": 4.912459850311279
+      },
+      {
+        "task": "Played Guitar",
+        "value": 1.2673249244689941
+      },
+      {
+        "task": "Went for a walk",
+        "value": 3.3774611949920654
+      },
+      {
+        "task": "Gym",
+        "value": 3.634178638458252
+      },
+      {
+        "task": "Cooked",
+        "value": 2.8387575149536133
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Cleaned",
+        "value": 0.5808830261230469
+      },
+      {
+        "task": "Went for a walk",
+        "value": 1.3869434595108032
+      },
+      {
+        "task": "Cooked",
+        "value": 0.9791275858879089
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Homework",
+        "value": 2.2255096435546875
+      },
+      {
+        "task": "Dance",
+        "value": 2.2303719520568848
+      },
+      {
+        "task": "Partying",
+        "value": 2.9097721576690674
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Worked",
+        "value": 2.75018572807312
+      },
+      {
+        "task": "Worked",
+        "value": 2.47914981842041
+      },
+      {
+        "task": "Cooked",
+        "value": 2.1323049068450928
+      },
+      {
+        "task": "Played Guitar",
+        "value": 3.161921501159668
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Watched TV",
+        "value": 2.163891553878784
+      },
+      {
+        "task": "Watched hockey",
+        "value": 2.1140213012695312
+      },
+      {
+        "task": "Dance",
+        "value": 4.3935546875
+      },
+      {
+        "task": "Watched hockey",
+        "value": 4.5528974533081055
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Pottery Class",
+        "value": 3.1910338401794434
+      },
+      {
+        "task": "Played chess",
+        "value": 2.996267795562744
+      },
+      {
+        "task": "Listened to music",
+        "value": 4.08054256439209
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Cooked",
+        "value": 1.1112234592437744
+      },
+      {
+        "task": "Dance",
+        "value": 4.3972578048706055
+      },
+      {
+        "task": "Cooked",
+        "value": 4.949918746948242
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Sleeping",
+        "value": 1.6121926307678223
+      },
+      {
+        "task": "Partying",
+        "value": 4.451746463775635
+      },
+      {
+        "task": "Reading",
+        "value": 1.6096538305282593
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Gym",
+        "value": 3.4067158699035645
+      },
+      {
+        "task": "Pottery Class",
+        "value": 2.318371295928955
+      },
+      {
+        "task": "Tutoring",
+        "value": 4.1176862716674805
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Dance",
+        "value": 2.7823755741119385
+      },
+      {
+        "task": "Programmed",
+        "value": 4.502765655517578
+      },
+      {
+        "task": "Worked",
+        "value": 4.104835033416748
+      },
+      {
+        "task": "Played Video games",
+        "value": 1.080918550491333
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Played chess",
+        "value": 1.3040655851364136
+      },
+      {
+        "task": "Worked",
+        "value": 0.09130358695983887
+      },
+      {
+        "task": "Pottery Class",
+        "value": 3.1323323249816895
+      },
+      {
+        "task": "Played Video games",
+        "value": 2.3213987350463867
+      },
+      {
+        "task": "Tutoring",
+        "value": 4.202848434448242
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Programmed",
+        "value": 4.873882293701172
+      },
+      {
+        "task": "Played catan",
+        "value": 1.337738275527954
+      },
+      {
+        "task": "Went out with friends",
+        "value": 4.215976715087891
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Went out with friends",
+        "value": 3.582542896270752
+      },
+      {
+        "task": "Run",
+        "value": 3.6588706970214844
+      },
+      {
+        "task": "Run",
+        "value": 2.9077396392822266
+      },
+      {
+        "task": "Cuddled my dog",
+        "value": 2.4097445011138916
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Reading",
+        "value": 3.7210397720336914
+      },
+      {
+        "task": "Listened to music",
+        "value": 2.334153175354004
+      },
+      {
+        "task": "Transit",
+        "value": 4.027615547180176
+      },
+      {
+        "task": "Homework",
+        "value": 1.8052878379821777
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Played chess",
+        "value": 4.611788272857666
+      },
+      {
+        "task": "Cleaned",
+        "value": 4.200989246368408
+      },
+      {
+        "task": "Homework",
+        "value": 3.2761411666870117
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Programmed",
+        "value": 4.2645416259765625
+      },
+      {
+        "task": "Sleeping",
+        "value": 4.926114559173584
+      },
+      {
+        "task": "Played Guitar",
+        "value": 1.5486619472503662
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Cleaned",
+        "value": 1.9128837585449219
+      },
+      {
+        "task": "Went for a walk",
+        "value": 1.520646572113037
+      },
+      {
+        "task": "Worked",
+        "value": 0.8129346370697021
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Homework",
+        "value": 0.47789573669433594
+      },
+      {
+        "task": "Went for a walk",
+        "value": 1.804567575454712
+      },
+      {
+        "task": "Pottery Class",
+        "value": 0.951043963432312
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Studying",
+        "value": 0.9499272704124451
+      },
+      {
+        "task": "Gym",
+        "value": 2.7483513355255127
+      },
+      {
+        "task": "Played Guitar",
+        "value": 1.393125057220459
+      },
+      {
+        "task": "Pottery Class",
+        "value": 2.892796039581299
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Tutoring",
+        "value": 0.4315832257270813
+      },
+      {
+        "task": "Watched hockey",
+        "value": 2.8858165740966797
+      },
+      {
+        "task": "Listened to music",
+        "value": 4.12698221206665
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Programmed",
+        "value": 3.191072463989258
+      },
+      {
+        "task": "Watched hockey",
+        "value": 3.711197853088379
+      },
+      {
+        "task": "Played Video games",
+        "value": 3.7093801498413086
+      },
+      {
+        "task": "Pottery Class",
+        "value": 4.7143235206604
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Sleeping",
+        "value": 2.9414234161376953
+      },
+      {
+        "task": "Studying",
+        "value": 4.479647159576416
+      },
+      {
+        "task": "Talked on the phone",
+        "value": 0.04554957151412964
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Transit",
+        "value": 3.1031579971313477
+      },
+      {
+        "task": "Programmed",
+        "value": 3.0253243446350098
+      },
+      {
+        "task": "Talked on the phone",
+        "value": 0.565248429775238
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Watched TV",
+        "value": 4.708923816680908
+      },
+      {
+        "task": "Worked",
+        "value": 4.634769916534424
+      },
+      {
+        "task": "Transit",
+        "value": 1.412790060043335
+      },
+      {
+        "task": "Played Guitar",
+        "value": 3.767348527908325
+      },
+      {
+        "task": "Watched hockey",
+        "value": 0.35084038972854614
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Tutoring",
+        "value": 0.6501847505569458
+      },
+      {
+        "task": "Tutoring",
+        "value": 2.53188157081604
+      },
+      {
+        "task": "Tutoring",
+        "value": 0.06394088268280029
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Positive",
+    "dailyTaskList": [
+      {
+        "task": "Watched TV",
+        "value": 3.542468547821045
+      },
+      {
+        "task": "Programmed",
+        "value": 4.608434677124023
+      },
+      {
+        "task": "Went for a walk",
+        "value": 0.351254940032959
+      }
+    ],
+    "counted": 1
+  },
+  {
+    "mood": "Negative",
+    "dailyTaskList": [
+      {
+        "task": "Homework",
+        "value": 8
+      },
+      {
+        "task": "Studied",
+        "value": 4
+      },
+      {
+        "task": "Watched hockey",
+        "value": 1
+      }
+    ],
+    "counted": 1
+  }
+]
