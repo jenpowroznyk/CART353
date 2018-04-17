@@ -1,62 +1,176 @@
 [
   {
-    "totalTime": 0,
-    "occurances": 30,
-    "taskName": "eat",
-    "value": 0
+    "totalTime": 1,
+    "occurances": 1,
+    "taskName": "Ran",
+    "value": 8.017000198364258
   },
   {
-    "totalTime": 0,
-    "occurances": 30,
-    "taskName": "dork",
-    "value": 0
+    "totalTime": 13.458807945251465,
+    "occurances": 7,
+    "taskName": "Run",
+    "value": -0.4667268991470337
   },
   {
-    "totalTime": 0,
-    "occurances": 30,
-    "taskName": "swim",
-    "value": 0
-  },
-  {
-    "totalTime": 0,
-    "occurances": 15,
-    "taskName": "bike",
-    "value": 15
-  },
-  {
-    "totalTime": 0,
-    "occurances": 15,
-    "taskName": "sleep",
-    "value": -15
-  },
-  {
-    "totalTime": 0,
-    "occurances": 15,
-    "taskName": "dance",
-    "value": -15
-  },
-  {
-    "totalTime": 0,
-    "occurances": 15,
-    "taskName": "double",
-    "value": -15
-  },
-  {
-    "totalTime": 0,
-    "occurances": 15,
-    "taskName": "log",
-    "value": -15
-  },
-  {
-    "totalTime": 0,
-    "occurances": 15,
-    "taskName": "swatching",
-    "value": -15
-  },
-  {
-    "totalTime": 0,
+    "totalTime": 15.380302429199219,
     "occurances": 6,
-    "taskName": "LegDancing",
-    "value": -6
+    "taskName": "Partying",
+    "value": 2.588357448577881
+  },
+  {
+    "totalTime": 46.616424560546875,
+    "occurances": 15,
+    "taskName": "Programmed",
+    "value": -0.5998144149780273
+  },
+  {
+    "totalTime": 24.592866897583008,
+    "occurances": 10,
+    "taskName": "Watched hockey",
+    "value": 1.5062235593795776
+  },
+  {
+    "totalTime": 16.25286865234375,
+    "occurances": 7,
+    "taskName": "Sleeping",
+    "value": 3.115683078765869
+  },
+  {
+    "totalTime": 29.09486961364746,
+    "occurances": 12,
+    "taskName": "Cooked",
+    "value": -0.008099973201751709
+  },
+  {
+    "totalTime": 27.470672607421875,
+    "occurances": 11,
+    "taskName": "Worked",
+    "value": 1.0275475978851318
+  },
+  {
+    "totalTime": 14.29435920715332,
+    "occurances": 7,
+    "taskName": "Played chess",
+    "value": 1.5261528491973877
+  },
+  {
+    "totalTime": 16.407283782958984,
+    "occurances": 6,
+    "taskName": "Transit",
+    "value": 3.4476354122161865
+  },
+  {
+    "totalTime": 8.227529525756836,
+    "occurances": 3,
+    "taskName": "Went out with friends",
+    "value": -0.6334538459777832
+  },
+  {
+    "totalTime": 22.594097137451172,
+    "occurances": 9,
+    "taskName": "Homework",
+    "value": 1.6510801315307617
+  },
+  {
+    "totalTime": 20.768815994262695,
+    "occurances": 9,
+    "taskName": "Dance",
+    "value": 0.30265331268310547
+  },
+  {
+    "totalTime": 7.3710174560546875,
+    "occurances": 4,
+    "taskName": "Surfed the web",
+    "value": 2.252210855484009
+  },
+  {
+    "totalTime": 12.785087585449219,
+    "occurances": 6,
+    "taskName": "Studying",
+    "value": 1.1774320602416992
+  },
+  {
+    "totalTime": 24.27056121826172,
+    "occurances": 7,
+    "taskName": "Watched TV",
+    "value": 0.8641872406005859
+  },
+  {
+    "totalTime": 24.18439292907715,
+    "occurances": 9,
+    "taskName": "Tutoring",
+    "value": 4.024294376373291
+  },
+  {
+    "totalTime": 18.81122398376465,
+    "occurances": 8,
+    "taskName": "Gym",
+    "value": 0.26002585887908936
+  },
+  {
+    "totalTime": 41.2067985534668,
+    "occurances": 13,
+    "taskName": "Cleaned",
+    "value": 1.6614246368408203
+  },
+  {
+    "totalTime": 17.49417495727539,
+    "occurances": 5,
+    "taskName": "Played catan",
+    "value": -0.5260210633277893
+  },
+  {
+    "totalTime": 15.023798942565918,
+    "occurances": 6,
+    "taskName": "Played Video games",
+    "value": 1.2895101308822632
+  },
+  {
+    "totalTime": 32.15534973144531,
+    "occurances": 11,
+    "taskName": "Played Guitar",
+    "value": 2.2710931301116943
+  },
+  {
+    "totalTime": 24.669952392578125,
+    "occurances": 10,
+    "taskName": "Pottery Class",
+    "value": 0.9056277871131897
+  },
+  {
+    "totalTime": 17.725345611572266,
+    "occurances": 6,
+    "taskName": "Reading",
+    "value": 1.5349414348602295
+  },
+  {
+    "totalTime": 6.952047348022461,
+    "occurances": 3,
+    "taskName": "Cuddled my dog",
+    "value": 1.2251956462860107
+  },
+  {
+    "totalTime": 9.082168579101562,
+    "occurances": 7,
+    "taskName": "Went for a walk",
+    "value": -0.8213425278663635
+  },
+  {
+    "totalTime": 13.601737022399902,
+    "occurances": 7,
+    "taskName": "Talked on the phone",
+    "value": 2.0430703163146973
+  },
+  {
+    "totalTime": 22.233213424682617,
+    "occurances": 6,
+    "taskName": "Listened to music",
+    "value": 1.304957628250122
+  },
+  {
+    "totalTime": 4,
+    "occurances": 1,
+    "taskName": "Studied",
+    "value": -0.3333333432674408
   }
 ]
