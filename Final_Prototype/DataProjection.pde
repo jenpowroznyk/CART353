@@ -1,4 +1,4 @@
-class DataProjection
+class DataProjection //<>// //<>//
 {
   ArrayList<ArrayList<String>> listOfTotalTasksInAllDays;
 
@@ -16,29 +16,23 @@ class DataProjection
     {
       ArrayList<String> tasksInADay = new ArrayList<String>();
       JSONObject day = totalDailyTasks.getJSONObject(i);
-      
+
       // check to see if the day is listed or not. 
       //int dayCount = day.getInt("listed");
       //boolean isListed = dayCount == 1;
-
-      //if (isListed)
-      //{
-      //  continue;
-      //}
 
       if (!day.getString("mood").equalsIgnoreCase("positive"))
       {
         continue;
       }
 
-
       JSONArray listOfDailyTasks = day.getJSONArray("dailyTaskList");
       for (int j = 0; j < listOfDailyTasks.size(); j++)
       {
-        tasksInADay.add(listOfDailyTasks.getJSONObject(j).getString("task")); //<>//
+        tasksInADay.add(listOfDailyTasks.getJSONObject(j).getString("task"));
       }
-     // day.setInt("listed", 1);
-      listOfTotalTasksInAllDays.add(tasksInADay); //<>//
+      // day.setInt("listed", 1);
+      listOfTotalTasksInAllDays.add(tasksInADay);
     }
 
     CreateTaskRelationshipsCatalogue(true);
@@ -59,7 +53,7 @@ class DataProjection
       }
 
       JSONArray listOfDailyTasks = day.getJSONArray("dailyTaskList");
-      for (int j = 0; j < totalDailyTasks.size(); j++)
+      for (int j = 0; j < listOfDailyTasks.size(); j++)
       {
         tasksInADay.add(listOfDailyTasks.getJSONObject(j).getString("task"));
       }
@@ -71,13 +65,10 @@ class DataProjection
 
   void CreateTaskRelationshipsCatalogue(boolean isPositive)
   {  
-    JSONArray uniqueTasks = loadJSONArray("data/usertasks.json"); 
-    
-    // very cool way of using a boolean
-    // if true: load positivecatalogue.json, if false: load negativecatalogue.json
+    JSONArray uniqueTasks = loadJSONArray("data/usertasks.json");
     JSONObject taskClumps = isPositive ? loadJSONObject("data/positivecatalogue.json") : loadJSONObject("data/negativecatalogue.json");
     taskClumps = new JSONObject();
-    
+
     String currentTask = "";
 
     for (int i = 0; i < uniqueTasks.size(); i++)
@@ -96,8 +87,7 @@ class DataProjection
           if (taskClumps.hasKey(currentTask))
           {
             currentTaskClump = taskClumps.getJSONObject(currentTask);
-          } 
-          else
+          } else
           {
             currentTaskClump = new JSONObject();
             taskClumps.setJSONObject(currentTask, currentTaskClump);
@@ -117,8 +107,7 @@ class DataProjection
                 int value = currentTaskClump.getInt(task);
                 value++;
                 currentTaskClump.setInt(task, value);
-              }
-              else
+              } else
               {
                 currentTaskClump.setInt(task, 1);
               }
@@ -130,5 +119,6 @@ class DataProjection
 
     String filePath = isPositive ? "data/positivecatalogue.json" : "data/negativecatalogue.json";
     saveJSONObject(taskClumps, filePath);
+    listOfTotalTasksInAllDays.clear();
   }
 }
