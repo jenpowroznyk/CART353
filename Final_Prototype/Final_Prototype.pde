@@ -1,8 +1,19 @@
 
+/*** 
+ 
+ 1. fix task display so they are in order (use a list instead of a hashmap)
+ 2. Add Page explanations 
+ 3. Clump tasks data
+ 4. Create display for data 
+ 5. Comment everything 
+ 
+ ***/
+
+
 import g4p_controls.*;
 import java.util.Map;
 
-int pageCount = 1;
+int pageCount = 0;
 
 GTextField task;
 GTextField time;
@@ -38,61 +49,68 @@ GOption positive;
 
 GButton submitTasks;
 GButton submitDay; // On submission of mood
+GButton done;
 
 String[] moodInput;
 String[] taskContainer;
 String[] timeContainer;
+String[] tasksToPrint = new String[6];
+String[] tasksTimeToPrint = new String[6];
+int numberOfTasksSubmitted = 0;
 
 // variables to place in hashmap
-String hmTask;
+String hmTask = "";
 float hmTime;
 String hmMood;
 
 HashMap<String, Float> storedDailyValues = new HashMap<String, Float>();
 
+//DisplayTextOnSubmit displayTasks; 
+
 ProcessingDailyData processInput;
 DataProjection createCatalogue;
-
-
 
 void setup()
 {
   size(600, 400);
-  
- 
-    // page one buttons 
-    positive = new GOption(this, 20, 125, 80, 50, "Positive");
-    negative = new GOption(this, 100, 125, 110, 50, "Negative");
-  
-    moodSelect = new GToggleGroup();
-    moodSelect.addControls(positive, negative);
-  
-    submitTasks = new GButton(this, 20, 50, 70, 70, "Submit Tasks");
-    submitDay = new GButton(this, 20, 180, 70, 70, "Submit Day");
-  
-    timeSpent = new GTextField(this, 230, 20, 90, 20);
-    timeSpent.setText("Hours Spent");
-    taskName = new GTextField(this, 20, 20, 200, 20);
-    taskName.setText("Activity Name");
-  
-    // page 2 buttons
-    task = new GTextField(this, 20, 20, 200, 20);
-    task.setText("Task");
+  G4P.setGlobalColorScheme(15);
 
-    task1 = new GTextField(this, 20, 50, 200, 20);
-    task1.setText("Task");
-    
-    task2 = new GTextField(this, 20, 80, 200, 20);
-    task2.setText("Task");
+  // page one buttons 
+  positive = new GOption(this, 20, 125, 80, 50, "Positive");
+  negative = new GOption(this, 100, 125, 110, 50, "Negative");
 
-    task3 = new GTextField(this, 20, 110, 200, 20);
-    task3.setText("Task");
+  moodSelect = new GToggleGroup();
+  moodSelect.addControls(positive, negative);
 
-    task4 = new GTextField(this, 20, 140, 200, 20);
-    task4.setText("Task");
+  submitTasks = new GButton(this, 510, 150, 70, 20, "Submit");
+  submitDay = new GButton(this, 20, 180, 80, 20, "Submit Day");
+  done = new GButton(this, 20, 330, 70, 20, "DONE");
 
-    calculate = new GButton(this, 20, 170, 70, 70, "Calculate");
-    newDay = new GButton(this, 230, 170, 70, 70, "New Day");
+  timeSpent = new GTextField(this, 230, 150, 90, 20);
+  timeSpent.setText("HOURS");
+  taskName = new GTextField(this, 20, 150, 200, 20);
+  taskName.setText("TASK NAME");
+
+  // displayTasks = new DisplayTextOnSubmit(hmTask, hmTime);
+
+  // page 2 buttons
+  task = new GTextField(this, 20, 20, 200, 20);
+  task.setText("Task");
+
+  task1 = new GTextField(this, 20, 50, 200, 20);
+  task1.setText("Task");
+
+  task2 = new GTextField(this, 20, 80, 200, 20);
+  task2.setText("Task");
+
+  task3 = new GTextField(this, 20, 110, 200, 20);
+  task3.setText("Task");
+
+  task4 = new GTextField(this, 20, 140, 200, 20);
+  task4.setText("Task");
+
+  calculate = new GButton(this, 20, 170, 70, 70, "Calculate");
+  newDay = new GButton(this, 230, 170, 70, 70, "New Day");
 
   drawPage1();
   dailyData = loadJSONArray("data2.json");
@@ -104,13 +122,21 @@ void drawPage1() {
 
   if (pageCount == 0)
   {
-    positive.setVisible(true);
-    negative.setVisible(true);
+    fill(255, 127, 80);
+    textSize(25);
+    text("Enter a task and the amount of time spent on it.", 20, 40, 500, 80);
+
+    fill(0);
+    rect(20, 170, 200, 0.5);
+    rect(230, 170, 90, 0.5);
     submitTasks.setVisible(true);
-    submitDay.setVisible(true);
     timeSpent.setVisible(true);
     taskName.setVisible(true);
-   
+    done.setVisible(true);
+
+    positive.setVisible(false);
+    negative.setVisible(false);
+    submitDay.setVisible(false);
     task.setVisible(false);
     task1.setVisible(false);
     task2.setVisible(false);
@@ -129,7 +155,8 @@ void drawPage1() {
     task4.setVisible(true);
     calculate.setVisible(true);
     newDay.setVisible(true);
-    
+
+    done.setVisible(false);
     positive.setVisible(false);
     negative.setVisible(false);
     submitTasks.setVisible(false);
@@ -137,9 +164,39 @@ void drawPage1() {
     timeSpent.setVisible(false);
     taskName.setVisible(false);
   }
+
+  if (pageCount == 2)
+  {
+    fill(255, 127, 80);
+    textSize(25);
+    text("Do you feel accomplished today?", 20, 40, 500, 80);
+    
+    positive.setVisible(true);
+    negative.setVisible(true);
+    submitDay.setVisible(true);
+
+    done.setVisible(false);
+    submitTasks.setVisible(false);
+    timeSpent.setVisible(false);
+    taskName.setVisible(false);
+    task.setVisible(false);
+    task1.setVisible(false);
+    task2.setVisible(false);
+    task3.setVisible(false);
+    task4.setVisible(false);
+    calculate.setVisible(false);
+    newDay.setVisible(false);
+  }
 }
 
 void handleButtonEvents(GButton button, GEvent event) {
+
+  if (button == done && event == GEvent.CLICKED) 
+  {
+    drawPage1();
+    pageCount = 2;
+  }
+
   if (button == submitTasks && event == GEvent.CLICKED) {
 
     // not sure about this if statement
@@ -155,8 +212,10 @@ void handleButtonEvents(GButton button, GEvent event) {
     {
       hmTask = taskContainer[0];
       hmTime = Float.parseFloat(timeContainer[0]);
+      numberOfTasksSubmitted++;
 
       storedDailyValues.put(hmTask, hmTime);
+      printTaskValuesOnSubmit(storedDailyValues);
     } else {
 
       println("FILL IN BOTH FIELDS PLEASE");
@@ -176,7 +235,7 @@ void handleButtonEvents(GButton button, GEvent event) {
       moodInput = new String[] { negative.getText() };
       hmMood = moodInput[0];
     }
-    
+
     pageCount = 1;
     drawPage1();
     convertToJsonArray();
@@ -184,33 +243,33 @@ void handleButtonEvents(GButton button, GEvent event) {
 
   if (button == calculate && event == GEvent.CLICKED) 
   {
-    
+
     ArrayList<String> tasksToBeProjected;
     tasksToBeProjected = new ArrayList<String>();
-    
+
     String name = task.getText();
     tasksToBeProjected.add(name);
-    
+
     String name1 = task1.getText();
     tasksToBeProjected.add(name1);
-    
+
     String name2 = task2.getText();
     tasksToBeProjected.add(name2);
-    
+
     String name3 = task3.getText();
     tasksToBeProjected.add(name3);
-    
+
     String name4 = task4.getText();
     tasksToBeProjected.add(name4);
 
     moodPrediction = new PredictMood();
     moodPrediction.PrintThing(tasksToBeProjected);
   }
-  
+
   if (button == newDay && event == GEvent.CLICKED) 
   {
     pageCount = 0;
-    drawPage1(); 
+    drawPage1();
   }
 }
 
@@ -235,7 +294,7 @@ void convertToJsonArray()
 
       dailyTaskList.append(taskData);
     }
-    
+
     dayObject.setInt("listed", 0);
     dayObject.setInt("counted", 0);
     dayObject.setString("mood", hmMood);
@@ -247,9 +306,56 @@ void convertToJsonArray()
   }
   processInput.GetInputData();
   createCatalogue.ExtractPostiveTasksFromEachDay();
+  createCatalogue.ExtractNegativeTasksFromEachDay();
 }
 
+void printTaskValuesOnSubmit(HashMap<String, Float> storedDailyValues)
+{
+  int counter = 0;
+  int overflowCounter = numberOfTasksSubmitted;
+  for (Map.Entry me : storedDailyValues.entrySet()) {
+    if (overflowCounter > 6)
+    {
+      overflowCounter--;
+      continue;
+    }
+
+    float timeDisplay = Float.parseFloat(me.getValue().toString());
+    String time = str(timeDisplay);
+
+    tasksToPrint[counter] = (me.getKey().toString());
+    tasksTimeToPrint[counter] = time + "h";
+    counter++;
+  }
+}
 
 void draw() {
-  background(200, 200, 255);
+
+  background(255);
+  fill(0);
+
+  drawPage1();
+
+
+  //timeSpent = new GTextField(this, 230, 20, 90, 20);
+  //timeSpent.setText("HOURS");
+  //taskName = new GTextField(this, 20, 20, 200, 20);
+  //taskName.setText("TASK NAME");
+  if (pageCount == 0) {
+    if (tasksToPrint[0] != null)
+    {
+      int initalYPos = 190;
+
+      for (int i = 0; i < tasksToPrint.length; i++)
+      {
+        if (tasksToPrint[i] != null) {
+          textSize(11);
+          text(tasksToPrint[i], 20, initalYPos);
+          text(tasksTimeToPrint[i], 230, initalYPos);
+
+          initalYPos += 20;
+        }
+      }
+    }
+  }
 }
