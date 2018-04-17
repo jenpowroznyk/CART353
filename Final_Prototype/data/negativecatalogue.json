@@ -1,69 +1,238 @@
 {
-  "haha": {"remain the same": 257},
-  "bd": {},
-  "thsisis": {},
-  "sjsjs": {},
-  "activity": {},
-  "gubble": {
-    "gubble nineteen": 257,
-    "gub-it!": 257
+  "Cleaned": {
+    "Cooked": 1,
+    "Played chess": 1,
+    "Worked": 1,
+    "Dance": 2,
+    "Run": 1,
+    "Programmed": 1,
+    "Went for a walk": 1,
+    "Studying": 1,
+    "Played Guitar": 1,
+    "Homework": 1
   },
-  "faith": {},
-  "locky": {},
-  "hfhf": {},
-  "two": {},
-  "bike": {
-    "eat": 257,
-    "dork": 257,
-    "swim": 257
+  "Studied": {
+    "Homework": 1,
+    "Watched hockey": 1
   },
-  "hahaha": {
-    "lolola": 257,
-    "lolo": 257
+  "Tutoring": {
+    "Pottery Class": 1,
+    "Gym": 1,
+    "Studying": 1,
+    "Watched TV": 1,
+    "Homework": 1
   },
-  "eat": {
-    "dork": 257,
-    "swim": 257,
-    "bike": 257
+  "Pottery Class": {
+    "Reading": 1,
+    "Cooked": 1,
+    "Tutoring": 1,
+    "Played Video games": 1,
+    "Listened to music": 1,
+    "Gym": 1,
+    "Played catan": 1,
+    "Programmed": 2,
+    "Went for a walk": 1,
+    "Played Guitar": 1,
+    "Homework": 1,
+    "Watched hockey": 1
   },
-  "gubble nineteen": {
-    "gubble": 257,
-    "gub-it!": 257
+  "Cuddled my dog": {
+    "Went out with friends": 1,
+    "Run": 2
   },
-  "lolola": {
-    "lolo": 257,
-    "hahaha": 257
+  "Worked": {
+    "Cleaned": 1,
+    "Cooked": 1,
+    "Played Video games": 1,
+    "Dance": 1,
+    "Programmed": 1,
+    "Went for a walk": 1,
+    "Played Guitar": 1
   },
-  "gh": {},
-  "sjdd": {},
-  "ghg": {},
-  "hi hi": {},
-  "hhh": {},
-  "djdjd": {},
-  "dork": {
-    "eat": 257,
-    "swim": 257,
-    "bike": 257
+  "Gym": {
+    "Partying": 1,
+    "Cooked": 2,
+    "Pottery Class": 1,
+    "Tutoring": 1,
+    "Talked on the phone": 1,
+    "Programmed": 1,
+    "Played catan": 1,
+    "Went for a walk": 1,
+    "Played Guitar": 1
   },
-  "house building": {},
-  "fhfhf": {},
-  "dhbdd": {},
-  "blaaaaah": {"hihi": 10},
-  "remain the same": {"haha": 257},
-  "hihi": {"blaaaaah": 10},
-  "lolo": {
-    "lolola": 257,
-    "hahaha": 257
+  "Partying": {
+    "Gym": 1,
+    "Programmed": 1
   },
-  "TEST": {},
-  "oh crap": {},
-  "swim": {
-    "eat": 257,
-    "dork": 257,
-    "bike": 257
+  "Cooked": {
+    "Cleaned": 1,
+    "Played chess": 1,
+    "Pottery Class": 1,
+    "Talked on the phone": 1,
+    "Went out with friends": 1,
+    "Worked": 2,
+    "Dance": 1,
+    "Gym": 2,
+    "Played catan": 2,
+    "Went for a walk": 1,
+    "Transit": 1,
+    "Played Guitar": 2
   },
-  "gub-it!": {
-    "gubble": 257,
-    "gubble nineteen": 257
+  "Played chess": {
+    "Cleaned": 1,
+    "Cooked": 2,
+    "Went out with friends": 1,
+    "Transit": 1,
+    "Homework": 1
+  },
+  "Played Video games": {
+    "Pottery Class": 1,
+    "Worked": 1,
+    "Dance": 1,
+    "Programmed": 2,
+    "Watched hockey": 1
+  },
+  "Listened to music": {
+    "Reading": 1,
+    "Pottery Class": 1,
+    "Programmed": 2,
+    "Went for a walk": 1,
+    "Watched TV": 1,
+    "Played Guitar": 1
+  },
+  "Went out with friends": {
+    "Played chess": 1,
+    "Cooked": 2,
+    "Cuddled my dog": 1,
+    "Run": 2,
+    "Transit": 1
+  },
+  "Run": {
+    "Cleaned": 1,
+    "Cuddled my dog": 1,
+    "Went out with friends": 1,
+    "Programmed": 1,
+    "Studying": 1,
+    "Played Guitar": 1
+  },
+  "Programmed": {
+    "Cleaned": 1,
+    "Partying": 1,
+    "Played Video games": 2,
+    "Listened to music": 2,
+    "Run": 1,
+    "Studying": 1,
+    "Reading": 1,
+    "Pottery Class": 2,
+    "Sleeping": 1,
+    "Worked": 1,
+    "Dance": 1,
+    "Gym": 1,
+    "Went for a walk": 1,
+    "Watched TV": 1,
+    "Played Guitar": 3,
+    "Watched hockey": 1
+  },
+  "Studying": {
+    "Cleaned": 1,
+    "Tutoring": 1,
+    "Run": 1,
+    "Programmed": 1,
+    "Watched TV": 1,
+    "Played Guitar": 1,
+    "Homework": 1
+  },
+  "Transit": {
+    "Played chess": 1,
+    "Cooked": 2,
+    "Went out with friends": 1
+  },
+  "Reading": {
+    "Pottery Class": 1,
+    "Listened to music": 1,
+    "Programmed": 1,
+    "Played Guitar": 1
+  },
+  "Sleeping": {
+    "Programmed": 1,
+    "Played Guitar": 1
+  },
+  "Talked on the phone": {
+    "Cooked": 1,
+    "Gym": 1
+  },
+  "Dance": {
+    "Cleaned": 3,
+    "Cooked": 1,
+    "Played Video games": 1,
+    "Worked": 1,
+    "Programmed": 1,
+    "Watched TV": 1,
+    "Watched hockey": 2
+  },
+  "Played catan": {
+    "Pottery Class": 1,
+    "Cooked": 2,
+    "Gym": 1,
+    "Went for a walk": 1,
+    "Played Guitar": 1
+  },
+  "Went for a walk": {
+    "Cleaned": 1,
+    "Cooked": 1,
+    "Pottery Class": 1,
+    "Listened to music": 1,
+    "Worked": 1,
+    "Gym": 1,
+    "Programmed": 1,
+    "Played catan": 1,
+    "Watched TV": 1,
+    "Played Guitar": 1,
+    "Homework": 1
+  },
+  "Watched TV": {
+    "Tutoring": 1,
+    "Listened to music": 1,
+    "Dance": 1,
+    "Programmed": 1,
+    "Went for a walk": 1,
+    "Studying": 1,
+    "Homework": 1,
+    "Watched hockey": 2
+  },
+  "Played Guitar": {
+    "Cleaned": 1,
+    "Cooked": 2,
+    "Listened to music": 1,
+    "Run": 1,
+    "Programmed": 3,
+    "Studying": 1,
+    "Reading": 1,
+    "Pottery Class": 1,
+    "Sleeping": 1,
+    "Worked": 2,
+    "Gym": 1,
+    "Played catan": 1,
+    "Went for a walk": 1
+  },
+  "Watched hockey": {
+    "Pottery Class": 1,
+    "Played Video games": 1,
+    "Dance": 1,
+    "Programmed": 1,
+    "Watched TV": 1,
+    "Homework": 1,
+    "Studied": 1
+  },
+  "Homework": {
+    "Cleaned": 1,
+    "Tutoring": 1,
+    "Played chess": 1,
+    "Pottery Class": 1,
+    "Went for a walk": 1,
+    "Studying": 1,
+    "Watched TV": 1,
+    "Studied": 1,
+    "Watched hockey": 1
   }
 }
