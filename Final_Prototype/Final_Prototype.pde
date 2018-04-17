@@ -1,238 +1,255 @@
-//  x Change text index to JSON data //<>// //<>//
-//  x Split dictionaries into "days"
-//  x Create a check for if day is "positive" or "negative"
-//    Create Input for log data
-//  x Assign new "negative" + "positive" values to each task in a day
-//    Create outputs for mood scale
-//    Assume what clump of tasks create what moods
-//    Create general interface 
-//    Create a function for measuring certainty of prediction
-//    Input time value AND see if it's possible to also guage based on time spent. 
 
-//    if they appear in the same dailyTaskArray --> take their average mood value (from when they appear together),  compare it to each of their mood values without eachother
-//    --> This tells you how much happier one is when they do 2 things together over with other combinations of things. 
-
-
+import g4p_controls.*;
 import java.util.Map;
 
+int pageCount = 1;
+
+GTextField task;
+GTextField time;
+GTextField task1;
+GTextField time1;
+GTextField task2;
+GTextField time2;
+GTextField task3;
+GTextField time3;
+GTextField task4;
+GTextField time4;
+
+GButton calculate;
+GButton newDay; 
+
+
+PredictMood moodPrediction;
+String[] taskNames;
+GTextArea thistest;
+// variables for Processing Daily Data
+
 JSONArray dailyData;
-JSONObject day;
-JSONArray dailyTasks;
 JSONArray userTasks;
 
-String[] moodTest;
+// variables for data input 
+
+GTextField taskName;
+GTextField timeSpent;
+
+GToggleGroup moodSelect;
+GOption negative;
+GOption positive;
+
+GButton submitTasks;
+GButton submitDay; // On submission of mood
+
+String[] moodInput;
+String[] taskContainer;
+String[] timeContainer;
+
+// variables to place in hashmap
+String hmTask;
+float hmTime;
+String hmMood;
+
+HashMap<String, Float> storedDailyValues = new HashMap<String, Float>();
+
+ProcessingDailyData processInput;
+DataProjection createCatalogue;
+
+
 
 void setup()
 {
   size(600, 400);
+  
+ 
+    // page one buttons 
+    positive = new GOption(this, 20, 125, 80, 50, "Positive");
+    negative = new GOption(this, 100, 125, 110, 50, "Negative");
+  
+    moodSelect = new GToggleGroup();
+    moodSelect.addControls(positive, negative);
+  
+    submitTasks = new GButton(this, 20, 50, 70, 70, "Submit Tasks");
+    submitDay = new GButton(this, 20, 180, 70, 70, "Submit Day");
+  
+    timeSpent = new GTextField(this, 230, 20, 90, 20);
+    timeSpent.setText("Hours Spent");
+    taskName = new GTextField(this, 20, 20, 200, 20);
+    taskName.setText("Activity Name");
+  
+    // page 2 buttons
+    task = new GTextField(this, 20, 20, 200, 20);
+    task.setText("Task");
 
-  // create global variables for input json array and output json array
+    task1 = new GTextField(this, 20, 50, 200, 20);
+    task1.setText("Task");
+    
+    task2 = new GTextField(this, 20, 80, 200, 20);
+    task2.setText("Task");
+
+    task3 = new GTextField(this, 20, 110, 200, 20);
+    task3.setText("Task");
+
+    task4 = new GTextField(this, 20, 140, 200, 20);
+    task4.setText("Task");
+
+    calculate = new GButton(this, 20, 170, 70, 70, "Calculate");
+    newDay = new GButton(this, 230, 170, 70, 70, "New Day");
+
+  drawPage1();
   dailyData = loadJSONArray("data2.json");
-  userTasks = loadJSONArray("usertasks.json");
+  processInput = new ProcessingDailyData();
+  createCatalogue = new DataProjection();
+}
 
-  // run through the array of day objects that is input by the user
-  for (int i = 0; i < dailyData.size(); i ++)
+void drawPage1() {
+
+  if (pageCount == 0)
   {
-    // get the "mood" value and the array of tasks in each day object
-    day = dailyData.getJSONObject(i);
-    String mood = day.getString("mood");
-    dailyTasks = day.getJSONArray("dailyTaskList");
+    positive.setVisible(true);
+    negative.setVisible(true);
+    submitTasks.setVisible(true);
+    submitDay.setVisible(true);
+    timeSpent.setVisible(true);
+    taskName.setVisible(true);
+   
+    task.setVisible(false);
+    task1.setVisible(false);
+    task2.setVisible(false);
+    task3.setVisible(false);
+    task4.setVisible(false);
+    calculate.setVisible(false);
+    newDay.setVisible(false);
+  }
 
-    // for each day object, check if the value at key "mood" is "positive"
-    // if it does match, then get each object in the "dailyTaskArray" and get the task name and time spent
-    moodTest = match(mood, "positive");
-    if (moodTest != null)
+  if (pageCount == 1)
+  {
+    task.setVisible(true);
+    task1.setVisible(true);
+    task2.setVisible(true);
+    task3.setVisible(true);
+    task4.setVisible(true);
+    calculate.setVisible(true);
+    newDay.setVisible(true);
+    
+    positive.setVisible(false);
+    negative.setVisible(false);
+    submitTasks.setVisible(false);
+    submitDay.setVisible(false);
+    timeSpent.setVisible(false);
+    taskName.setVisible(false);
+  }
+}
+
+void handleButtonEvents(GButton button, GEvent event) {
+  if (button == submitTasks && event == GEvent.CLICKED) {
+
+    // not sure about this if statement
+    // Trying to make sure both text fields are populated before submission
+    // So that the hashmap doesn't mess up
+
+    timeContainer = new String[] { timeSpent.getText() };
+    taskContainer = new String[] { taskName.getText() };
+
+    //LOOK AT THIS IF BECAUSE IT"S BREAKING THINGS 
+    // After testing it seemed to break something LOOK AT IT
+    if (!timeContainer[0].isEmpty()  && !taskContainer[0].isEmpty() )
     {
-      for (int j = 0; j < dailyTasks.size(); j++)
-      {        
-        JSONObject individualTaskData = dailyTasks.getJSONObject(j);
-        String taskName = individualTaskData.getString("task");
-        float hours = 0;
+      hmTask = taskContainer[0];
+      hmTime = Float.parseFloat(timeContainer[0]);
 
-        // if the task name doesn't exist in usertasks.json already...call the add new entry to user tasks function and pass isPositive as true
-        if (!DoesEntryExistInUserTasks(taskName, userTasks, true, hours))
-        {
-          AddNewEntryToUserTasks(taskName, userTasks, true, hours);
-        }
-      }
-    } else 
-    {
-      // if the value at the "mood" key does not match "positive", then get each object in the "dailyTaskArray" and get the task name and time spent values
-      // if the DoesEntryExistInUserTasks returns false, then pass false to the isPositive boolean and call the AddNewEntryToUserTasks function
-      for (int j = 0; j < dailyTasks.size(); j++)
-      {
+      storedDailyValues.put(hmTask, hmTime);
+    } else {
 
-        JSONObject individualTaskData = dailyTasks.getJSONObject(j);
-        String taskName = individualTaskData.getString("task");
-        float hours = 0;
-
-        if (!DoesEntryExistInUserTasks(taskName, userTasks, false, hours))
-        {
-          AddNewEntryToUserTasks(taskName, userTasks, false, hours);
-        }
-      }
+      println("FILL IN BOTH FIELDS PLEASE");
     }
-  }
+  } 
 
-  // creating a hashmap that is returned by the "ScaleValues()" function
-  HashMap<String, Float> myData = ScaleValues(GetMaxValue(userTasks), GetMinValue(userTasks), userTasks);
-}
-
-// Draws the chart in the sketch
-void draw()
-{
-}
-
-// function for appending new task to array in the usertasks json file
-void AddNewEntryToUserTasks(String newTaskName, JSONArray userTasks, boolean isPositive, float hours)
-{
-  // setting our keys + values in the newEntry json object, appending newEntry to the usertasks json array, and saving that data. 
-  //shorthand if statement, ? (the question - is it true) first value yes second value no 
-  int value = isPositive ? 1 : -1;
-  JSONObject newEntry = new JSONObject();
-  newEntry.setString("taskName", newTaskName);
-  newEntry.setInt("value", value);
-  newEntry.setInt("occurances", 1);
-  newEntry.setFloat("totalTime", hours);
-  userTasks.append(newEntry);
-  saveJSONArray(userTasks, "data/usertasks.json");
-}
-
-// function for updating data associated with existing tasks in the "usertasks" json array 
-void UpdateExisitingEntryInUserTasks(int indexOfEntry, JSONArray userTasks, boolean isPositive, float hours)
-{
-
-  //shorthand if statement, ? (the question - is it true) first value yes second value no 
-  // if isPositive returns true "value" = 1, otherwise "value" = -1
-  int value = isPositive ? 1 : -1;
-
-  // then what is the DailyTaskArray size?
-  // Add all the tasks individual values. 
-  // divide them by the DailyTaskArray size. 
-
-  // at each index passed get the int at "value" key and add "value"
-  // then set the new value in the json usertasks document
-  value += userTasks.getJSONObject(indexOfEntry).getInt("value");
-  userTasks.getJSONObject(indexOfEntry).setInt("value", value);
-
-  // get the value of occurances stored in the json usertasks document and increment it by 1 
-  // then store that new value in the json usertasks document
-  int occurance = userTasks.getJSONObject(indexOfEntry).getInt("occurances");
-  occurance++;
-  userTasks.getJSONObject(indexOfEntry).setInt("occurances", occurance);
-
-  // get the value of totalTime stored in the json usertasks document and increment it by the amount of hours spent on the new entry for that task
-  // then store that new value in the json usertasks document
-  hours += userTasks.getJSONObject(indexOfEntry).getFloat("totalTime");
-  userTasks.getJSONObject(indexOfEntry).setFloat("totalTime", hours);
-
-  // save the changed usertasks json array to the usertasks.json file
-  saveJSONArray(userTasks, "data/usertasks.json");
-}
-
-// function returning a boolean value for whether a task exists in usertask.json array or not
-boolean DoesEntryExistInUserTasks(String taskName, JSONArray userTasks, boolean isPositive, float hours)
-{
-  // run through the userTask array 
-  for (int i = 0; i < userTasks.size(); i++)
-  {  
-    // checking if taskName from the input data is the same as the value stored at the "taskName" key in the output data at each object in the array
-    // if so, DoesEntryExistInUserTasks() returns true and we call the function for updating existing data passing the index 
-    if (taskName.equalsIgnoreCase(userTasks.getJSONObject(i).getString("taskName")))
+  if (button == submitDay && event == GEvent.CLICKED) 
+  {
+    if (positive.isSelected() == true)
     {
-      UpdateExisitingEntryInUserTasks(i, userTasks, isPositive, hours);
-      return true;
+      moodInput = new String[] { positive.getText() };
+      hmMood = moodInput[0];
     }
-  }
 
-  // otherwise return false
-  return false;
-}
-
-// function for scaling the scores of each task 
-// ScaleValues returns a hashmap.
-HashMap<String, Float> ScaleValues(int max, int min, JSONArray userTasks)
-{
-
-  HashMap<String, Float> userTaskValues = new HashMap<String, Float>();
-
-  // find biggest absolute value(ignore negative of min if negative)
-  // create a ceiling 
-  int absoluteMin = Math.abs(min);
-  int ceiling = max;
-
-  // if the value of max is smaller than the absoluteMin value, make the ceiling equal to the absoluteMin value.
-  if (max < absoluteMin)
-  {
-    ceiling = absoluteMin;
-  }
-
-  // make a scale ratio by dividing the largest number by 100
-  float scaleRatio = 100 / ceiling;
-
-  // run through the usertasks.json array and at every object get the "taskName" key value and put it in taskName
-  // and get the "value" key value and put it in value
-  // multiply the value by the scale ratio
-  for (int i = 0; i < userTasks.size(); i++)
-  {
-    String taskName = userTasks.getJSONObject(i).getString("taskName");
-    float value = userTasks.getJSONObject(i).getInt("value");
-    value *= scaleRatio;
-
-    // place the task name and the scaled value in the userTaskValues hashmap
-    userTaskValues.put(taskName, value);
-  }
-
-  for (Map.Entry value : userTaskValues.entrySet()) 
-  {
-    print(value.getKey() + " is ");
-    println(value.getValue());
-  }
-
-  // return the hashmap
-  return userTaskValues;
-}
-
-// get the maximum value in the usertasks.json array 
-int GetMaxValue(JSONArray userTasks)
-{
-  // set a really low number for the max so that the found max value is able to be stored
-  int max = -100000000;
-
-  // run through the usertasks.json array and get the "value" keys value at each index
-  for (int i = 0; i < userTasks.size(); i++)
-  {
-    int value = userTasks.getJSONObject(i).getInt("value");
-
-    // if the value recieved is bigger than max, then max = value 
-    if (value > max)
+    if (negative.isSelected() == true)
     {
-      max = value;
+      moodInput = new String[] { negative.getText() };
+      hmMood = moodInput[0];
     }
+    
+    pageCount = 1;
+    drawPage1();
+    convertToJsonArray();
   }
-  // return the highest number stored in the usertasks.json array 
-  return max;
-}
 
-// Return function for ensuring the min value of the barChart is set to the smalles time value in the log
-// This is to ensure that the values are never too small to be displayed
-int GetMinValue(JSONArray userTasks)
-{
-  int min = 1000000000;
-
-  for (int i = 0; i < userTasks.size(); i++)
+  if (button == calculate && event == GEvent.CLICKED) 
   {
-    int value = userTasks.getJSONObject(i).getInt("value");
+    
+    ArrayList<String> tasksToBeProjected;
+    tasksToBeProjected = new ArrayList<String>();
+    
+    String name = task.getText();
+    tasksToBeProjected.add(name);
+    
+    String name1 = task1.getText();
+    tasksToBeProjected.add(name1);
+    
+    String name2 = task2.getText();
+    tasksToBeProjected.add(name2);
+    
+    String name3 = task3.getText();
+    tasksToBeProjected.add(name3);
+    
+    String name4 = task4.getText();
+    tasksToBeProjected.add(name4);
 
-    if (value < min)
-    {
-      min = value;
-    }
+    moodPrediction = new PredictMood();
+    moodPrediction.PrintThing(tasksToBeProjected);
   }
-  return min;
+  
+  if (button == newDay && event == GEvent.CLICKED) 
+  {
+    pageCount = 0;
+    drawPage1(); 
+  }
 }
 
-// eat 76
-// 67
-// 23
-// min 20 , max 80 
+void convertToJsonArray()
+{
+  JSONObject dayObject = new JSONObject();
+  JSONArray dailyTaskList = new JSONArray();
+
+  if (!storedDailyValues.isEmpty()) {
+
+    // with json objects, instead of creating a copy of the object to place in the array
+    // calling a json object points to an objects memory address (pointing to the same thing) 
+    // need to specify type otherwise program has trouble compiling 
+    for (Map.Entry<String, Float> me : storedDailyValues.entrySet()) 
+    {  
+      String taskName = me.getKey();
+      float taskTime = me.getValue();
+
+      JSONObject taskData = new JSONObject();
+      taskData.setString("task", taskName);
+      taskData.setFloat("value", taskTime);
+
+      dailyTaskList.append(taskData);
+    }
+    
+    dayObject.setInt("listed", 0);
+    dayObject.setInt("counted", 0);
+    dayObject.setString("mood", hmMood);
+    dayObject.setJSONArray("dailyTaskList", dailyTaskList);
+    dailyData.append(dayObject);
+    saveJSONArray(dailyData, "data/data2.json");
+    //println(dailyData);
+    storedDailyValues.clear();
+  }
+  processInput.GetInputData();
+  createCatalogue.ExtractPostiveTasksFromEachDay();
+}
+
+
+void draw() {
+  background(200, 200, 255);
+}
