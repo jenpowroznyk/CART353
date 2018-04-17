@@ -1,0 +1,20 @@
+{
+  "gg": {},
+  "pizza": {
+    "pizz1": 1,
+    "pizzu": 1,
+    "pizzer": 1
+  },
+  "pizz1": {
+    "pizza": 1,
+    "pizzer": 1
+  },
+  "pizzu": {"pizza": 1},
+  "pizzer": {
+    "pizz1": 1,
+    "pizza": 1
+  },
+  "74g": {},
+  "jh": {},
+  "hg": {}
+}
