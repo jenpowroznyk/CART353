@@ -119,7 +119,7 @@ class VisualizeData
     return min;
   }
 
-  // called in draw 
+  // called in draw
   void drawTaskValues()
   {
     fill(255, 127, 80);
@@ -127,6 +127,6 @@ class VisualizeData
     text("Amount of time spent on each listed task.", 20, 20, 500, 20);
     fill(0);
     textSize(10);
-    barChart.draw(- 20, 40, width-20, height-60);
+    barChart.draw(- 100, 40, width-20, height-60);
   }
 }
