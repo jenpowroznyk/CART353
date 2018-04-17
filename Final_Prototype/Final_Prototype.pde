@@ -1,5 +1,6 @@
 
 /*** 
+ // WONT UPDATE CHART ON SUBMISSION
  
  1. fix task display so they are in order (use a list instead of a hashmap)
  2. Add Page explanations 
@@ -9,24 +10,20 @@
  
  ***/
 
-
 import g4p_controls.*;
 import java.util.Map;
 
 int pageCount = 0;
 
 GTextField task;
-GTextField time;
 GTextField task1;
-GTextField time1;
 GTextField task2;
-GTextField time2;
 GTextField task3;
-GTextField time3;
 GTextField task4;
-GTextField time4;
+GTextField individualTask;
 
 GButton calculate;
+GButton calculateIndividual;
 GButton newDay; 
 
 
@@ -50,6 +47,9 @@ GOption positive;
 GButton submitTasks;
 GButton submitDay; // On submission of mood
 GButton done;
+GButton testTasks;
+GButton returnToData;
+GButton viewTimeData;
 
 String[] moodInput;
 String[] taskContainer;
@@ -65,10 +65,15 @@ String hmMood;
 
 HashMap<String, Float> storedDailyValues = new HashMap<String, Float>();
 
+Boolean calculatePressed = false;
+Boolean individualCalculate = false;
+
 //DisplayTextOnSubmit displayTasks; 
 
 ProcessingDailyData processInput;
 DataProjection createCatalogue;
+
+VisualizeData seeData;
 
 void setup()
 {
@@ -85,6 +90,9 @@ void setup()
   submitTasks = new GButton(this, 510, 150, 70, 20, "Submit");
   submitDay = new GButton(this, 20, 180, 80, 20, "Submit Day");
   done = new GButton(this, 20, 330, 70, 20, "DONE");
+  testTasks = new GButton(this, 20, 20, 90, 20, "Test Positivity");
+  returnToData = new GButton(this, width - 90, 20, 70, 20, "Home");
+  viewTimeData = new GButton(this, 20, 80, 70, 20, "View Time Chart");
 
   timeSpent = new GTextField(this, 230, 150, 90, 20);
   timeSpent.setText("HOURS");
@@ -94,25 +102,32 @@ void setup()
   // displayTasks = new DisplayTextOnSubmit(hmTask, hmTime);
 
   // page 2 buttons
-  task = new GTextField(this, 20, 20, 200, 20);
+  task = new GTextField(this, 20, 40, 100, 20);
   task.setText("Task");
 
-  task1 = new GTextField(this, 20, 50, 200, 20);
+  task1 = new GTextField(this, 20, 70, 100, 20);
   task1.setText("Task");
 
-  task2 = new GTextField(this, 20, 80, 200, 20);
+  task2 = new GTextField(this, 20, 100, 100, 20);
   task2.setText("Task");
 
-  task3 = new GTextField(this, 20, 110, 200, 20);
+  task3 = new GTextField(this, 20, 130, 100, 20);
   task3.setText("Task");
 
-  task4 = new GTextField(this, 20, 140, 200, 20);
+  task4 = new GTextField(this, 20, 160, 100, 20);
   task4.setText("Task");
 
-  calculate = new GButton(this, 20, 170, 70, 70, "Calculate");
-  newDay = new GButton(this, 230, 170, 70, 70, "New Day");
+  individualTask = new GTextField(this, 20, 260, 200, 20);
+  individualTask.setText("Individual Task");
+
+  calculate = new GButton(this, 20, 190, 70, 20, "Calculate");
+  calculateIndividual = new GButton(this, 20, 290, 70, 20, "Calculate");
+  newDay = new GButton(this, 230, 170, 70, 20, "New Day");
+
+  seeData = new VisualizeData(this);
 
   drawPage1();
+  moodPrediction = new PredictMood();
   dailyData = loadJSONArray("data2.json");
   processInput = new ProcessingDailyData();
   createCatalogue = new DataProjection();
@@ -133,7 +148,9 @@ void drawPage1() {
     timeSpent.setVisible(true);
     taskName.setVisible(true);
     done.setVisible(true);
+    returnToData.setVisible(true);
 
+    calculateIndividual.setVisible(false);
     positive.setVisible(false);
     negative.setVisible(false);
     submitDay.setVisible(false);
@@ -144,18 +161,36 @@ void drawPage1() {
     task4.setVisible(false);
     calculate.setVisible(false);
     newDay.setVisible(false);
+    testTasks.setVisible(false);
+    individualTask.setVisible(false);
   }
 
   if (pageCount == 1)
-  {
-    task.setVisible(true);
-    task1.setVisible(true);
-    task2.setVisible(true);
-    task3.setVisible(true);
-    task4.setVisible(true);
-    calculate.setVisible(true);
-    newDay.setVisible(true);
+  { 
+    fill(255, 127, 80);
+    textSize(14);
+    text("Enter a sequence of tasks to see how likely they are to effect your day positively.", 20, 20, 500, 80);
 
+    task.setVisible(true);
+    rect(20, 60, 100, 0.5);
+    task1.setVisible(true);
+    rect(20, 90, 100, 0.5);
+    task2.setVisible(true);
+    rect(20, 120, 100, 0.5);
+    task3.setVisible(true);
+    rect(20, 150, 100, 0.5);
+    task4.setVisible(true);
+    rect(20, 180, 100, 0.5);
+
+    text("Enter a single task to see how positively it effects you in comparison to all stored tasks.", 20, 240, 500, 80);
+
+    individualTask.setVisible(true);
+    rect(20, 280, 100, 0.5);
+    calculateIndividual.setVisible(true);
+    calculate.setVisible(true);
+    returnToData.setVisible(true);
+
+    newDay.setVisible(false);
     done.setVisible(false);
     positive.setVisible(false);
     negative.setVisible(false);
@@ -163,6 +198,7 @@ void drawPage1() {
     submitDay.setVisible(false);
     timeSpent.setVisible(false);
     taskName.setVisible(false);
+    testTasks.setVisible(false);
   }
 
   if (pageCount == 2)
@@ -170,11 +206,14 @@ void drawPage1() {
     fill(255, 127, 80);
     textSize(25);
     text("Do you feel accomplished today?", 20, 40, 500, 80);
-    
+
+    returnToData.setVisible(true);
     positive.setVisible(true);
     negative.setVisible(true);
     submitDay.setVisible(true);
 
+    calculateIndividual.setVisible(false);
+    individualTask.setVisible(false);
     done.setVisible(false);
     submitTasks.setVisible(false);
     timeSpent.setVisible(false);
@@ -186,15 +225,81 @@ void drawPage1() {
     task4.setVisible(false);
     calculate.setVisible(false);
     newDay.setVisible(false);
+    testTasks.setVisible(false);
+  }
+  // home
+  if (pageCount == 3)
+  {
+    newDay.setVisible(true);
+    testTasks.setVisible(true);
+    //returnToData.setVisible(true);
+
+    calculateIndividual.setVisible(false);
+    individualTask.setVisible(false);
+    positive.setVisible(false);
+    negative.setVisible(false);
+    submitDay.setVisible(false);
+    done.setVisible(false);
+    submitTasks.setVisible(false);
+    timeSpent.setVisible(false);
+    taskName.setVisible(false);
+    task.setVisible(false);
+    task1.setVisible(false);
+    task2.setVisible(false);
+    task3.setVisible(false);
+    task4.setVisible(false);
+    calculate.setVisible(false);
+  }
+  if (pageCount == 4)
+  { 
+
+    returnToData.setVisible(true);
+    viewTimeData.setVisible(true);
+
+    newDay.setVisible(false);
+    testTasks.setVisible(false);
+    calculateIndividual.setVisible(false);
+    individualTask.setVisible(false);
+    positive.setVisible(false);
+    negative.setVisible(false);
+    submitDay.setVisible(false);
+    done.setVisible(false);
+    submitTasks.setVisible(false);
+    timeSpent.setVisible(false);
+    taskName.setVisible(false);
+    task.setVisible(false);
+    task1.setVisible(false);
+    task2.setVisible(false);
+    task3.setVisible(false);
+    task4.setVisible(false);
+    calculate.setVisible(false);
   }
 }
 
 void handleButtonEvents(GButton button, GEvent event) {
+  if (button == returnToData && event == GEvent.CLICKED) 
+  {
+    drawPage1();
+    individualCalculate = false;
+    calculatePressed = false;
+    pageCount = 3;
+  }
+
+  if (button == testTasks && event == GEvent.CLICKED) 
+  {
+    drawPage1();
+    pageCount = 1;
+  }
 
   if (button == done && event == GEvent.CLICKED) 
   {
     drawPage1();
     pageCount = 2;
+  }
+  if (button == viewTimeData && event == GEvent.CLICKED) 
+  {
+    drawPage1();
+    pageCount = 4;
   }
 
   if (button == submitTasks && event == GEvent.CLICKED) {
@@ -236,9 +341,10 @@ void handleButtonEvents(GButton button, GEvent event) {
       hmMood = moodInput[0];
     }
 
-    pageCount = 1;
+    pageCount = 3;
     drawPage1();
     convertToJsonArray();
+    seeData.getTaskValues();
   }
 
   if (button == calculate && event == GEvent.CLICKED) 
@@ -262,8 +368,17 @@ void handleButtonEvents(GButton button, GEvent event) {
     String name4 = task4.getText();
     tasksToBeProjected.add(name4);
 
-    moodPrediction = new PredictMood();
     moodPrediction.PrintThing(tasksToBeProjected);
+    calculatePressed = true;
+  }
+
+  if (button == calculateIndividual && event == GEvent.CLICKED) 
+  {
+
+    String taskName = individualTask.getText();
+
+    moodPrediction.ScaleTaskValue(taskName);
+    individualCalculate = true;
   }
 
   if (button == newDay && event == GEvent.CLICKED) 
@@ -295,7 +410,6 @@ void convertToJsonArray()
       dailyTaskList.append(taskData);
     }
 
-    dayObject.setInt("listed", 0);
     dayObject.setInt("counted", 0);
     dayObject.setString("mood", hmMood);
     dayObject.setJSONArray("dailyTaskList", dailyTaskList);
@@ -336,11 +450,21 @@ void draw() {
 
   drawPage1();
 
+  if (individualCalculate)
+  {
+    moodPrediction.displayIndividualProjection();
+  }
 
-  //timeSpent = new GTextField(this, 230, 20, 90, 20);
-  //timeSpent.setText("HOURS");
-  //taskName = new GTextField(this, 20, 20, 200, 20);
-  //taskName.setText("TASK NAME");
+  if (calculatePressed)
+  {
+    moodPrediction.displayClumpProjection();
+  }
+
+  if (pageCount == 4)
+  {
+    seeData.drawTaskValues();
+  }
+
   if (pageCount == 0) {
     if (tasksToPrint[0] != null)
     {
