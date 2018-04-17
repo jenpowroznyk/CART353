@@ -1,0 +1,69 @@
+ [
+    {
+      "mood": "positive",
+      "dailyTaskList": [
+        {
+          "task": "eat",
+          "value": 0
+        },
+        {
+          "task": "dork",
+          "value": 0
+        },
+        {
+          "task": "swim",
+          "value": 0
+        },
+        {
+          "task": "bike",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "mood": "negative",
+      "dailyTaskList": [
+        {
+          "task": "swim",
+          "value": 0
+        },
+        {
+          "task": "dork",
+          "value": 0
+        },
+        {
+          "task": "sleep",
+          "value": 0
+        },
+        {
+          "task": "dance",
+          "value": 0
+        }
+      ]
+    },
+    {
+      "mood": "negative",
+      "dailyTaskList": [
+        {
+          "task": "eat",
+          "value": 0
+        },
+        {
+          "task": "double",
+          "value": 0
+        },
+        {
+          "task": "log",
+          "value": 0
+        },
+        {
+          "task": "swatching",
+          "value": 0
+        },
+ 	{
+          "task": "LegDancing",
+          "value": 0
+        }
+      ]
+    }
+  ]
