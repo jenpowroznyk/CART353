@@ -1,0 +1,62 @@
+[
+  {
+    "totalTime": 0,
+    "occurances": 30,
+    "taskName": "eat",
+    "value": 0
+  },
+  {
+    "totalTime": 0,
+    "occurances": 30,
+    "taskName": "dork",
+    "value": 0
+  },
+  {
+    "totalTime": 0,
+    "occurances": 30,
+    "taskName": "swim",
+    "value": 0
+  },
+  {
+    "totalTime": 0,
+    "occurances": 15,
+    "taskName": "bike",
+    "value": 15
+  },
+  {
+    "totalTime": 0,
+    "occurances": 15,
+    "taskName": "sleep",
+    "value": -15
+  },
+  {
+    "totalTime": 0,
+    "occurances": 15,
+    "taskName": "dance",
+    "value": -15
+  },
+  {
+    "totalTime": 0,
+    "occurances": 15,
+    "taskName": "double",
+    "value": -15
+  },
+  {
+    "totalTime": 0,
+    "occurances": 15,
+    "taskName": "log",
+    "value": -15
+  },
+  {
+    "totalTime": 0,
+    "occurances": 15,
+    "taskName": "swatching",
+    "value": -15
+  },
+  {
+    "totalTime": 0,
+    "occurances": 6,
+    "taskName": "LegDancing",
+    "value": -6
+  }
+]
